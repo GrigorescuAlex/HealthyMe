@@ -1,0 +1,42 @@
+<div class="container">
+  <button (click)="toggleBodyFat()" class="btn btn-primary my-sm-5">
+    Show Body Fat
+  </button>
+</div>
+<table class="table container">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Weight</th>
+      <!-- <th [hidden]="!showBodyFat" scope="col">Body Fat %</th> HIDDEN IN DOM-->
+      <th *ngIf="showBodyFat" scope="col">Body Fat %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of entries">
+      <td style="width:20px;">
+        <a [routerLink]="['/entries/' + entry.id]">
+        <span class="detailIcon" ><i class="fas fa-info-circle"></i></span>  
+        </a>
+      </td>
+      <td>{{entry.date | date: 'dd/MM/yyyy'}}</td>
+      <td>{{entry.weight}} Kg</td>
+      <!-- <td [hidden]="!showBodyFat" >{{entriesSvc.sortedEntries[0].bodyfat | percent}}</td> HIDDEN IN DOM-->
+      <td *ngIf="showBodyFat" >{{entry.bodyfat | percent}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<div class="container row">
+  <div class="col-sm">
+    <hm-new-weight-entry 
+    [showBodyFat]="showBodyFat" 
+    (create)="createNewEntry($event)" 
+    ></hm-new-weight-entry>
+  </div>
+  <div class="col-sm">
+
+  </div>
+</div>
